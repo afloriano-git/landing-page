@@ -27,18 +27,6 @@ El script raíz ejecuta la instalación de dependencias dentro de `backend`.
 ### Variables de entorno
 
 El backend utiliza un archivo `backend/.env` para centralizar la configuración. Las variables por defecto para utilizar el proyecto son:
-> [!WARNING]  
-> El .env debe ser creado a mano en el deployment.
-
-```env
-PORT=3000
-NODE_ENV=production
-USER_DB=db/userdb.json
-JWT_SECRET=clave_secreta
-```
-
-> [!TIP]
-> Se recomienda copiar directamente los valores por defecto
 
 `PORT` es el puerto que abrira el servidor.
 `NODE_ENV` es un valor para distinguir entre la fase de produccion y desarrollo.
@@ -79,13 +67,32 @@ El flujo principal es:
 4. El usuario accede a `/portfolio`.
 5. El portfolio carga datos dinámicos del usuario autenticado.
 
-> [!IMPORTANT]  
-> Ejecutar estos comandos en la raiz del proyecto para el deployment:
+### Cronología del deployment
+
+#### Paso 1: Crear .env
+
+> [!WARNING]  
+> El .env debe ser creado a mano en el deployment dentro de la carpeta backend/.
+
+```env
+PORT=3000
+NODE_ENV=production
+USER_DB=db/userdb.json
+JWT_SECRET=clave_secreta
+```
+
+> [!TIP]
+> Se recomienda copiar directamente los valores por defecto.
+
+#### Paso 2: Instalar dependencias y arrancar servidor
 
 ```bash
 npm run install
 npm run start
 ```
+
+> [!IMPORTANT]  
+> Ejecutar estos comandos en la raiz del proyecto para el deployment:
 
 ## 2. Funcionalidades principales implementadas
 
