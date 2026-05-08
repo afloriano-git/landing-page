@@ -19,43 +19,38 @@ El proyecto está dividido en dos partes:
 Desde la raíz del proyecto:
 
 ```bash
-npm install
+npm run install
 ```
 
 El script raíz ejecuta la instalación de dependencias dentro de `backend`.
 
 ### Variables de entorno
 
-El backend utiliza `backend/.env` para centralizar la configuración. Las variables esperadas por el proyecto son:
+El backend utiliza un archivo `backend/.env` para centralizar la configuración. Las variables por defecto para utilizar el proyecto son:
+> [!WARNING]  
+> El .env debe ser creado a mano en el deployment.
 
 ```env
 PORT=3000
-NODE_ENV=development
-USER_DB=backend/db/userdb.json
+NODE_ENV=production
+USER_DB=db/userdb.json
 JWT_SECRET=clave_secreta
 ```
 
-Estas variables se leen desde `backend/src/lib/env.js`:
+> [!TIP]
+> Se recomienda copiar directamente los valores por defecto
 
-```js
-import "dotenv/config";
-
-export const ENV = {
-  PORT: process.env.PORT,
-  NODE_ENV: process.env.NODE_ENV,
-  USER_DB: process.env.USER_DB,
-  JWT_SECRET: process.env.JWT_SECRET,
-};
-```
-
-Este módulo evita acceder directamente a `process.env` desde todos los archivos y permite que el resto del backend importe una configuración común.
+`PORT` es el puerto que abrira el servidor.
+`NODE_ENV` es un valor para distinguir entre la fase de produccion y desarrollo.
+`USER_DB` es la ruta donde se guardara la base de datos de usuarios.
+`JWT_SECRET` es la clave que se utliza para los tokens de session.
 
 ### Ejecución
 
 Desde la raíz:
 
 ```bash
-npm start
+npm run start
 ```
 
 Este comando ejecuta:
@@ -83,6 +78,14 @@ El flujo principal es:
 3. El backend crea una cookie de sesión.
 4. El usuario accede a `/portfolio`.
 5. El portfolio carga datos dinámicos del usuario autenticado.
+
+> [!IMPORTANT]  
+> Ejecutar estos comandos en la raiz del proyecto para el deployment:
+
+```bash
+npm run install
+npm run start
+```
 
 ## 2. Funcionalidades principales implementadas
 
