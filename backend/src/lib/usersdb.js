@@ -22,5 +22,9 @@ export const saveNewUser = (newUser) => {
 };
 
 export const checkEmailExists = (email) => {
-    return usersArray.find(u => u.email === email)
+    return usersArray.some(u => u.email === email);
+}
+
+export const getUser = (email) => {
+    return usersArray.find(u => u.email === email);
 }

@@ -2,9 +2,7 @@ import bcrypt from "bcryptjs";
 
 import User from "../model/User.js";
 
-import { checkEmailExists } from "../lib/usersdb.js";
-import { saveNewUser } from "../lib/usersdb.js";
-
+import { saveNewUser, checkEmailExists, getUser } from "../lib/usersdb.js";
 import { generateToken } from "../lib/token.generator.js";
 
 export const signup = async (req, res) => {
@@ -22,24 +20,54 @@ export const signup = async (req, res) => {
         const userExists = checkEmailExists(email);
         if(userExists) {return res.status(400).json({message:"Email already exists"});}
 
+        // GENERATES A HASHED PASSWORD
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
         const newUser = new User(fullName, email.toLowerCase(), hashedPassword);
         if(!newUser) {return res.status(400).json({message:"Invalid user data"});}
 
+        // SAVES THE NEW USER INTO THE DATABASE
         await saveNewUser(newUser);
+        // CALLS TOKEN GENRATION FUNCIONALITY
         generateToken(newUser.id, res);
 
-        res.status(201).json({
+        res.status(200).json({
             id: newUser.id,
             fullName: newUser.fullName,
             email:newUser.email
-        });
-        
+        });       
         
     } catch(error) {
         console.log(error);
         res.status(500).json({message:"Server error: " + error.message});
     }
+}
+
+export const login = async (req, res) => {
+    const {email, password} = req.body;
+    try {
+        const user = getUser(email);
+        if(!user) {return res.status(400).json({message:"Invalid credentials"})};
+        
+        const isPasswordCorrect = await bcrypt.compare(password, user.password);
+        if(!isPasswordCorrect) {return res.status(400).json({message:"Invalid credentials"})};
+
+        generateToken(user.id, res);
+
+        res.status(200).json({
+            id: user.id,
+            fullName: user.fullName,
+            email:user.email
+        });
+
+    } catch(error) {
+        console.log(error);
+        res.status(500).json({message:"Server error: " + error.message});
+    }
+}
+
+export const logout = async (_, res) => {
+    res.cookie("sessionToken", "", {maxAge: 0})
+    res.status(200).json({message:"Succesfully logged out"});
 }
