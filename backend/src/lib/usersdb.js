@@ -5,6 +5,7 @@ import { ENV } from "./env.js";
 
 const __dirname = path.resolve();
 const userDbPath = path.join(__dirname, ENV.USER_DB);
+fs.mkdirSync(path.dirname(userDbPath), { recursive: true });
 if (!fs.existsSync(userDbPath)) {fs.writeFileSync(userDbPath, JSON.stringify([]), "utf-8");}
 
 const getUsers = () => {
