@@ -6,7 +6,7 @@
     border: none;
     outline: none;
     scroll-behavior: smooth;
-    font-family: -apple-system, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 :root {
@@ -14,6 +14,9 @@
     --snd-bg-color: #d5fdf9;
     --text-color: #000;
     --main-color: #007F73;
+    --body-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --heading-font: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --accent-font: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 html {
@@ -29,6 +32,64 @@ body {
 section {
     min-height: 100vh;
     padding: 10rem 9% 2rem;
+}
+
+.parallax-section {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.parallax-layer {
+    will-change: transform;
+    transition: transform 0.08s linear;
+}
+
+.parallax-bg,
+.parallax-shape {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.parallax-section > :not(.parallax-bg):not(.parallax-shape) {
+    position: relative;
+    z-index: 1;
+}
+
+.parallax-bg {
+    inset: 0;
+    background:
+        radial-gradient(circle at 12% 20%, rgba(0, 127, 115, 0.16), transparent 28rem),
+        radial-gradient(circle at 86% 72%, rgba(0, 127, 115, 0.12), transparent 32rem);
+}
+
+.parallax-shape {
+    border: 0.2rem solid rgba(0, 127, 115, 0.28);
+    border-radius: 50%;
+    box-shadow: 0 0 3rem rgba(0, 127, 115, 0.1);
+}
+
+.parallax-shape-one {
+    width: 18rem;
+    height: 18rem;
+    top: 18%;
+    right: 8%;
+}
+
+.parallax-shape-two {
+    width: 11rem;
+    height: 11rem;
+    left: 8%;
+    bottom: 10%;
+}
+
+.parallax-shape-three {
+    width: 16rem;
+    height: 16rem;
+    right: 12%;
+    bottom: 12%;
+    border-color: rgba(0, 127, 115, 0.18);
 }
 
 /* Header & NavBar Section */
@@ -51,6 +112,7 @@ section {
 .logo {
     font-size: 3rem;
     color: var(--bg-color);
+    font-family: var(--accent-font);
     font-weight: 700;
     cursor: default;
     transition: 0.3s ease;
@@ -63,6 +125,7 @@ section {
 .navbar a {
     font-size: 1.9rem;
     color: var(--bg-color);
+    font-family: var(--heading-font);
     margin-left: 4rem;
     font-weight: 700;
     transition: 0.3s ease-in-out;
@@ -83,6 +146,7 @@ section {
 /* Home Section */
 
 .home {
+    z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -122,6 +186,7 @@ section {
 }
 
 .home-content h3 {
+    font-family: var(--heading-font);
     font-size: 3.7rem;
     font-weight: 700;
 }
@@ -135,6 +200,7 @@ span {
 }
 
 .home-content h1 {
+    font-family: var(--accent-font);
     font-size: 6rem;
     font-weight: 700;
     line-height: 1.3;
@@ -172,6 +238,7 @@ span {
     background: var(--main-color);
     border-radius: 4rem;
     box-shadow: none;
+    font-family: var(--heading-font);
     font-size: 1.6rem;
     color: var(--bg-color);
     letter-spacing: .1rem;
@@ -186,11 +253,14 @@ span {
 /* About Section */
 
 .about {
+    position: relative;
+    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 2rem;
     background: var(--snd-bg-color);
+    box-shadow: 0 -2rem 4rem rgba(0, 127, 115, 0.08);
 }
 
 .about-img img {
@@ -211,6 +281,7 @@ span {
 
 .heading {
     text-align: center;
+    font-family: var(--heading-font);
     font-size: 6rem;
 }
 
@@ -224,6 +295,7 @@ span {
 }
 
 .about-content h3 {
+    font-family: var(--heading-font);
     font-size: 3rem;
 }
 
@@ -267,6 +339,7 @@ span {
 }
 
 .services-box h3 {
+    font-family: var(--heading-font);
     font-size: 2.6rem;
 }
 
@@ -323,6 +396,7 @@ span {
     transform: scale(1.02);
 }
 .testimonial-item h2{
+    font-family: var(--heading-font);
     font-size: 3rem;
 }
 .testimonial-item p{
@@ -478,6 +552,10 @@ span {
     .home{
         flex-direction: column;
     }
+    .parallax-bg,
+    .parallax-shape {
+        display: none;
+    }
     .home-content h3{
         font-size: 2.6rem;
     }
@@ -517,5 +595,12 @@ span {
 @media (max-width:450px) {
     html{
         font-size: 50%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .parallax-layer {
+        transform: none !important;
+        transition: none;
     }
 }

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="auth.css">
+        <title>Login / Register - Personal Portfolio</title>
+    </head>
+    <body>
+        <header class="header">
+            <a class="logo">PERSONAL PORTFOLIO</a>
+        </header>
+
+        <main class="auth-page">
+            <div class="auth-bg"></div>
+            <div class="auth-shape auth-shape-one"></div>
+            <div class="auth-shape auth-shape-two"></div>
+
+            <section class="auth-container">
+                <div class="auth-intro">
+                    <h1>Welcome <span>Back</span></h1>
+                    <p>Login first, then create your personal portfolio with your own information.</p>
+                </div>
+
+                <div class="auth-forms">
+                    <form id="login-form" class="auth-card" action="#" method="post">
+                        <div class="auth-card-header">
+                            <i class="bx bx-log-in"></i>
+                            <h2>Login</h2>
+                        </div>
+
+                        <div class="input-box">
+                            <label for="login-email">Email</label>
+                            <input id="login-email" type="email" name="email" placeholder="Email Address" required>
+                        </div>
+
+                        <div class="input-box">
+                            <label for="login-password">Password</label>
+                            <input id="login-password" type="password" name="password" placeholder="Password" required>
+                        </div>
+
+                        <button type="submit" class="btn">Login</button>
+                    </form>
+
+                    <form id="register-form" class="auth-card" action="#" method="post">
+                        <div class="auth-card-header">
+                            <i class="bx bx-user-plus"></i>
+                            <h2>Register</h2>
+                        </div>
+
+                        <div class="input-box">
+                            <label for="register-fullName">Full Name</label>
+                            <input id="register-fullName" type="text" name="fullName" placeholder="Full Name" required>
+                        </div>
+
+                        <div class="input-box">
+                            <label for="register-email">Email</label>
+                            <input id="register-email" type="email" name="email" placeholder="Email Address" required>
+                        </div>
+
+                        <div class="input-box">
+                            <label for="register-password">Password</label>
+                            <input id="register-password" type="password" name="password" placeholder="Password" required>
+                        </div>
+
+                        <button type="submit" class="btn">Create Account</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>
