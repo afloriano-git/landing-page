@@ -6,12 +6,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="portfolio.css">
-    <title>Alvaro Floriano Forero - Portfolio</title>
+    <title>Portfolio</title>
 </head>
 <body>
     <!-- HEADER SECTION -->
     <header class="header">
-        <a href="#home" class="logo">Alvaro Floriano Forero</a>
+        <a href="#home" class="logo user-fullName-dependent">NOMBRE</a>
 
         <i class="bx bx-menu" id="menu-icon"></i>
 
@@ -21,6 +21,7 @@
             <a href="#services">Services</a>
             <a href="#testimonials">Testimonial</a>
             <a href="#contact">Contact</a>
+            <a href="#" class="logout-btn" id="logout-btn"><i class="bx bx-log-out"></i>Logout</a>
         </nav>
     </header>
 
@@ -35,7 +36,7 @@
         </div>
         <div class="home-content parallax-layer" data-speed="-0.04">
             <h3>Hello, Myself</h3>
-            <h1>Alvaro Floriano Forero</h1>
+            <h1 class="user-fullName-dependent">NOMBRE</h1>
             <h3>And I'm a <span class="multiple-text">Backend Deve</span></h3>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi, doloremque, veritatis voluptatibus
                 aspernatur necessitatibus earum, aliquam ipsa repellat iusto esse laudantium animi vitae consectetur
@@ -183,11 +184,12 @@
                 <a href="#"><i class="bx bxl-instagram"></i></a>
         </div>
 
-        <p class="copyright">
-            © Alvaro Floriano Forero - All Rights Reserved
+        <p class="copyright user-fullName-dependent">
+            © NOMBRE - All Rights Reserved
         </p>
     </footer>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="portfolio.js"></script>
 
     <style data-typed-js-cursor-css="true">

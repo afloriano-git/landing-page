@@ -150,6 +150,39 @@ span {
     transform: translateY(-0.6rem);
 }
 
+.auth-error {
+    display: none;
+    max-width: 70rem;
+    margin: 3rem auto 0;
+    padding: 1.4rem 2rem;
+    background: #fff;
+    border: 0.25rem solid #d93025;
+    border-radius: 0.8rem;
+    box-shadow: 0 0 2rem rgba(217, 48, 37, 0.12);
+    color: #d93025;
+    font-family: var(--heading-font);
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.auth-error.show {
+    display: block;
+    animation: errorPop 0.25s ease;
+}
+
+@keyframes errorPop {
+    0% {
+        opacity: 0;
+        transform: translateY(-0.8rem) scale(0.98);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
 .auth-card-header {
     display: flex;
     align-items: center;

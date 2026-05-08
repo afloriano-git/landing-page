@@ -136,6 +136,25 @@ section {
     color: var(--text-color);
 }
 
+.navbar .logout-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.6rem;
+    border: 0.2rem solid var(--bg-color);
+    border-radius: 4rem;
+    margin-left: 4rem;
+}
+
+.navbar .logout-btn:hover {
+    background: var(--bg-color);
+    color: var(--main-color);
+}
+
+.navbar .logout-btn i {
+    font-size: 2rem;
+}
+
 #menu-icon {
     font-size: 3.6rem;
     color: var(--bg-color);
@@ -544,6 +563,12 @@ span {
         display: block;
         padding: 17px;
         font-size: 22px;
+    }
+
+    .navbar .logout-btn {
+        display: inline-flex;
+        margin: 1.2rem 17px;
+        width: fit-content;
     }
 
     .navbar.active {
