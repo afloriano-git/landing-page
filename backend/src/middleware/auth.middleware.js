@@ -9,23 +9,26 @@ export const protectRoute = async (req, res, next) => {
         if(!token) return res.redirect("/auth");
 
         const decodedToken = jwt.verify(token, ENV.JWT_SECRET);
-        if(!decodedToken) {
-            res.clearCookie("sessionToken");
-            return res.redirect("/auth");
-        };
+        if(!decodedToken) return deauthUser(res);
 
         const user = await getUserWithId(decodedToken.userId);
-        if(!user) return res.status(404).json({message:"User not found"});
+        if(!user) return deauthUser(res);
 
         req.user = {
             id: user.id,
             fullName: user.fullName,
             email: user.email
         };
+
         next()
     } catch (error) {
         console.log("Error in protectRoute:", error);
         res.clearCookie("sessionToken");
         return res.redirect("/auth");
     }
+}
+
+function deauthUser(res) {
+    res.clearCookie("sessionToken");
+    return res.redirect("/auth");
 }
