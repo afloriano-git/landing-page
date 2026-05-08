@@ -5,6 +5,8 @@ import User from "../model/User.js";
 import { checkEmailExists } from "../lib/usersdb.js";
 import { saveNewUser } from "../lib/usersdb.js";
 
+import { generateToken } from "../lib/token.generator.js";
+
 export const signup = async (req, res) => {
     const {fullName, email, password} = req.body;
     try {
@@ -21,17 +23,23 @@ export const signup = async (req, res) => {
         if(userExists) {return res.status(400).json({message:"Email already exists"});}
 
         const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt)
+        const hashedPassword = await bcrypt.hash(password, salt);
 
-        const newUser = new User(fullName, email, hashedPassword)
+        const newUser = new User(fullName, email.toLowerCase(), hashedPassword);
         if(!newUser) {return res.status(400).json({message:"Invalid user data"});}
 
-        saveNewUser(newUser);
-        res.status(200).json({message:"Succesfull"});
+        await saveNewUser(newUser);
+        generateToken(newUser.id, res);
+
+        res.status(201).json({
+            id: newUser.id,
+            fullName: newUser.fullName,
+            email:newUser.email
+        });
         
         
     } catch(error) {
         console.log(error);
-        res.status(500).json({message:"Server error"});
+        res.status(500).json({message:"Server error: " + error.message});
     }
 }

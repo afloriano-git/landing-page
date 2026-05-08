@@ -15,6 +15,8 @@ let usersArray = getUsers();
 
 export const saveNewUser = (newUser) => {
     usersArray = getUsers();
+    newUser.id = usersArray.length+1;
+    
     usersArray.push(newUser);
     fs.writeFileSync(userDbPath, JSON.stringify(usersArray, null, 2));
 };
