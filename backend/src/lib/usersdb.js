@@ -15,16 +15,18 @@ let usersArray = getUsers();
 
 export const saveNewUser = (newUser) => {
     usersArray = getUsers();
-    newUser.id = usersArray.length+1;
-    
     usersArray.push(newUser);
     fs.writeFileSync(userDbPath, JSON.stringify(usersArray, null, 2));
 };
 
-export const checkEmailExists = (email) => {
-    return usersArray.some(u => u.email === email);
+export const checkEmailExists = (_email) => {
+    return usersArray.some(u => u.email === _email);
 }
 
-export const getUser = (email) => {
-    return usersArray.find(u => u.email === email);
+export const getUserWithEmail = (_email) => {
+    return usersArray.find(u => u.email === _email);
+}
+
+export const getUserWithId = (_id) => {
+    return usersArray.find(u => u.id === _id);
 }

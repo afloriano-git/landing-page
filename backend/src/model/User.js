@@ -1,6 +1,6 @@
 class User {
     constructor(_fullName, _email, _password) {
-        this.id;
+        this.id = crypto.randomUUID();
         this.fullName = _fullName;
         this.email = _email;
         this.password = _password;

@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 
 import User from "../model/User.js";
 
-import { saveNewUser, checkEmailExists, getUser } from "../lib/usersdb.js";
+import { saveNewUser, checkEmailExists, getUserWithEmail } from "../lib/usersdb.js";
 import { generateToken } from "../lib/token.generator.js";
 
 export const signup = async (req, res) => {
@@ -47,7 +47,7 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
     const {email, password} = req.body;
     try {
-        const user = getUser(email);
+        const user = getUserWithEmail(email);
         if(!user) {return res.status(400).json({message:"Invalid credentials"})};
         
         const isPasswordCorrect = await bcrypt.compare(password, user.password);
